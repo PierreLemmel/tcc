@@ -11,6 +11,7 @@ const navigationItems = [
     { href: '/presentation', label: 'Présentation' },
     { href: '/dates', label: 'Dates' },
     { href: '/temoignages', label: 'Témoignages' },
+    { href: '/espace-pro', label: 'Espace pro' },
 ];
 
 
