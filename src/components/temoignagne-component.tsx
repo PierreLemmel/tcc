@@ -179,7 +179,7 @@ const TemoignageComponent = () => {
 
     return (
         <div className={cn(
-            "h-full w-full",
+            "w-full",
             "flex flex-col items-center justify-center gap-6",
             "p-8"
         )}>

@@ -21,11 +21,11 @@ const Home = () => <PageContainer
         "gap-5",
     )}>
         <Button className="px-10">
-            <Link href="/temoignages">Enregistrer un témoignage</Link>
+            <Link href="/presentation">Présentation du spectacle</Link>
         </Button>
         
         <Button className="px-10">
-            <Link href="/presentation">Présentation du spectacle</Link>
+            <Link href="/temoignages">Enregistrer un témoignage</Link>
         </Button>
         
         <Button className="px-10">

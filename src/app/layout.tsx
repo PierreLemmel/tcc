@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import BurgerMenu from "@/components/burger-menu";
 
 export const metadata: Metadata = {
 	title: "Très chair corps",
@@ -15,7 +16,10 @@ const RootLayout = (props: RootLayoutProps) => {
 	const { children } = props;
 
 	return <html lang="fr">
-		<body>{children}</body>
+		<body>
+			<BurgerMenu />
+			{children}
+		</body>
 	</html>
 };
 
