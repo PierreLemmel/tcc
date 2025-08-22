@@ -8,7 +8,8 @@ const Presentation = () => <PageContainer
     backgroundImage="/backgrounds/presentation.jpeg"
     className={cn(
         "bg-[100%_0%]",
-        "grid grid-cols-2 items-center",
+        "grid grid-cols-1 md:grid-cols-2 items-center",
+        "py-2 md:py-0"
     )}
 >
 
@@ -43,10 +44,10 @@ const Presentation = () => <PageContainer
     <div className={cn(
         "h-full w-full",
         "flex flex-col items-center justify-start",
+        "order-first md:order-last",
+        "pb-4"
     )}>
         <TitleDisplay />
-
-        
     </div>
 
 </PageContainer>;

@@ -12,6 +12,7 @@ const Home = () => <PageContainer
         "bg-[50%_80%]",
         "flex flex-col items-center justify-between",
         "py-4 lg:pl-[50%]",
+        "pt-6 lg:pt-0",
     )}
 >
     <TitleDisplay />

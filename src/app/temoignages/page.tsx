@@ -7,7 +7,8 @@ const Temoignage = () => <PageContainer
     backgroundImage="/backgrounds/temoignages.jpeg"
     className={cn(
         "bg-[50%_80%]",
-        "grid grid-cols-2 items-center",
+        "grid grid-cols-1 md:grid-cols-2 items-center",
+        "py-2 md:py-0"
     )}
 >
 
@@ -29,6 +30,7 @@ const Temoignage = () => <PageContainer
     <div className={cn(
         "h-full w-full",
         "flex flex-col items-center justify-center",
+        "order-first md:order-last",
     )}>
         <TitleDisplay />
 

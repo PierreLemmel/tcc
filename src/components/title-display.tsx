@@ -7,7 +7,12 @@ const TitleDisplay = () => {
             "px-8 py-4",
             "flex flex-col items-center justify-center",
         )}>
-            <h1 className="text-6xl text-red-900 font-lemon">Très chair corps</h1>
+            <h1 className={cn(
+                "text-4xl lg:text-6xl",
+                "text-red-900 font-lemon"
+            )}>
+                Très chair corps
+            </h1>
             <p className="text-lg">Seule-en-scène improvisé</p>
         </div>
     </Link>
