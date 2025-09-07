@@ -27,6 +27,7 @@ const Dates = () => <PageContainer
         <div className="text-lg pl-6">Jeudi 2 octobre</div>
         <div className="text-lg pl-6">21 heures</div>
         <div className="text-lg pl-6">Théâtre Pixel</div>
+        <div className="text-lg pl-6">18 rue Championnet, 75018 Paris</div>
         <div className="text-lg pl-6 pb-4">Réservation obligatoire</div>
         <Link href="https://www.billetreduc.com/376170/evt.htm" target="_blank">
             <Button className="px-6 mt-3">
