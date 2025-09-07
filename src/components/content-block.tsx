@@ -13,7 +13,7 @@ const ContentBlock = (props: ContentBlockProps) => {
     return <div className={cn(
         "flex-grow",
         "flex flex-col items-center justify-center",
-        "px-12"
+        "px-4 md:px-8 lg:px-12"
     )}>
         <div className={cn(
             "flex flex-col items-stretch",

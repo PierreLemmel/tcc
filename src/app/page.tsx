@@ -7,8 +7,10 @@ import Link from "next/link";
 
 const Home = () => <PageContainer
     backgroundImage="/backgrounds/homepage.jpeg"
+    mobileBackgroundImage="/backgrounds/mobile-homepage.jpeg"
+    bgClassName="bg-[50%_80%]"
+    mobileBgClassName="bg-top"
     className={cn(
-        "bg-[50%_80%]",
         "flex flex-col items-center justify-between",
         "py-4 lg:pl-[50%]",
         "pt-6 lg:pt-0",

@@ -8,12 +8,15 @@ import Link from "next/link";
 
 const EspacePro = () => <PageContainer
     backgroundImage="/backgrounds/espace-pro.jpeg"
+    mobileBackgroundImage="/backgrounds/mobile-main.jpeg"
+    bgClassName="bg-[30%_60%]"
+    mobileBgClassName="bg-center opacity-50"
     className={cn(
-        "bg-[30%_60%]",
         "flex flex-col items-center",
         "py-4 lg:pl-[50%]",
         "pt-6 lg:pt-0",
-        "px-8"
+        "px-2 md:px-4 lg:px-8",
+        "gap-4"
     )}
 >
     <TitleDisplay />

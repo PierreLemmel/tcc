@@ -6,8 +6,10 @@ import { cn } from "@/lib/utils";
 
 const Temoignage = () => <PageContainer
     backgroundImage="/backgrounds/temoignages.jpeg"
+    mobileBackgroundImage="/backgrounds/mobile-main.jpeg"
+    bgClassName="bg-[50%_80%]"
+    mobileBgClassName="bg-center opacity-50"
     className={cn(
-        "bg-[50%_80%]",
         "grid grid-cols-1 md:grid-cols-2 items-center",
         "py-2 md:py-0"
     )}
@@ -22,6 +24,7 @@ const Temoignage = () => <PageContainer
             "w-3/4",
             "flex flex-col items-center justify-center",
             "text-center italic",
+            "pb-5"
         )}>
             Pour témoigner, appuyez sur le bouton pour démarrer l&apos;enregistrement, autorisez votre micro à enregistrer du son et parlez.<br />
             Pour terminer, réappuyez sur le bouton
@@ -32,6 +35,7 @@ const Temoignage = () => <PageContainer
         "h-full w-full",
         "flex flex-col items-center justify-center",
         "order-first md:order-last",
+        "gap-4"
     )}>
         <TitleDisplay />
         <ContentBlock title="Témoignages">

@@ -7,8 +7,10 @@ import Link from "next/link";
 
 const Presentation = () => <PageContainer
     backgroundImage="/backgrounds/presentation.jpeg"
+    mobileBackgroundImage="/backgrounds/mobile-main.jpeg"
+    bgClassName="bg-[100%_0%]"
+    mobileBgClassName="bg-center opacity-50"
     className={cn(
-        "bg-[100%_0%]",
         "grid grid-cols-1 md:grid-cols-2 items-center",
         "py-2 md:py-0"
     )}
