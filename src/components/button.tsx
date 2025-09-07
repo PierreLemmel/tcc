@@ -11,7 +11,7 @@ export type ButtonProps = {
 export const Button = (props: ButtonProps) => {
     const { onClick, className, children, variant = 'default' } = props;
 
-    const baseClasses = "inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full font-aaargh text-lg font-thin transition-colors duration-200 shadow-lg hover:shadow-xl focus:outline-none hover:cursor-pointer";
+    const baseClasses = "inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full font-opensans text-lg font-thin transition-colors duration-200 shadow-lg hover:shadow-xl focus:outline-none hover:cursor-pointer";
     
     const variantClasses = {
         default: "bg-red-900 hover:bg-red-800 text-white",

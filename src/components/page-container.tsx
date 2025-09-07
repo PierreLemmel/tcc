@@ -41,7 +41,7 @@ const PageContainer = (props: PageContainerProps) => {
         <div
             className={cn(
                 "relative z-10 w-full h-full overflow-auto min-h-screen",
-                "font-aaargh",
+                "font-opensans",
                 className
             )}
         >

@@ -99,7 +99,7 @@ const BurgerMenu = () => {
 										href={item.href}
 										onClick={closeMenu}
 										className={cn(
-                                            "block py-3 px-4 rounded-lg transition-all duration-200 font-aaargh text-lg",
+                                            "block py-3 px-4 rounded-lg transition-all duration-200 font-opensans text-lg",
 											pathname === item.href
 												? 'bg-white/10 text-red-600 font-bold'
 												: 'text-red-800/80 hover:bg-foreground/5 hover:text-red-700/90 font-semibold'
@@ -113,7 +113,7 @@ const BurgerMenu = () => {
 					</nav>
 
 					<div className="p-6 border-t border-white/10">
-						<p className="text-sm text-red-800/60 font-aaargh">
+						<p className="text-sm text-red-800/60 font-opensans">
 							Très chair corps
 						</p>
 					</div>
