@@ -1,4 +1,5 @@
 import Button from "@/components/button";
+import ContentBlock from "@/components/content-block";
 import PageContainer from "@/components/page-container";
 import TitleDisplay from "@/components/title-display";
 import { cn } from "@/lib/utils";
@@ -12,34 +13,14 @@ const Presentation = () => <PageContainer
         "py-2 md:py-0"
     )}
 >
-
-    <div className={cn(
-        "flex-grow",
-        "flex flex-col items-center justify-center",
-        "px-12"
-    )}>
-        <div className={cn(
-            "flex flex-col items-stretch",
-            "bg-white/50 rounded-lg border-2 border-red-900",
-            "px-4 py-2",
-            "gap-2",
-            "text-black"
-        )}>
-            <div className={cn(
-                "font-lemon text-red-900 text-4xl text-center",
-                "mt-2 mb-4"
-            )}>
-                Présentation du spectacle
-            </div>
-            <div className="text-center">
-                Depuis notre naissance, nous portons ce costume de peau qu&apos;est notre corps. Collé sur nos chairs, il nous définit, nous révèle mais nous entrave également. De la puissance émancipatrice que nous pouvons en tirer à la prison qu&apos;ils peuvent se révéler être, ce seule en scène explore nos rapports intimes, complexes et souvent ambigus au corps – le nôtre, mais aussi celui des autres.
-            </div>
-            <div className="text-center">
-                Ce spectacle improvisé se construit autour d&apos;anecdotes, témoignages anonymes que vous pouvez <Link href="/temoignages" className="underline text-red-900 hover:text-red-800 transition-colors duration-200 font-semibold">enregistrer ici</Link> et qui sont diffusés en introduction, inspirant les saynètes qui se créent durant une heure sous vos yeux.
-            </div>
+    <ContentBlock title="Présentation du spectacle">
+        <div className="text-center">
+            Depuis notre naissance, nous portons ce costume de peau qu&apos;est notre corps. Collé sur nos chairs, il nous définit, nous révèle mais nous entrave également. De la puissance émancipatrice que nous pouvons en tirer à la prison qu&apos;ils peuvent se révéler être, ce seule en scène explore nos rapports intimes, complexes et souvent ambigus au corps – le nôtre, mais aussi celui des autres.
         </div>
-    </div>
-
+        <div className="text-center">
+            Ce spectacle improvisé se construit autour d&apos;anecdotes, témoignages anonymes que vous pouvez <Link href="/temoignages" className="underline text-red-900 hover:text-red-800 transition-colors duration-200 font-semibold">enregistrer ici</Link> et qui sont diffusés en introduction, inspirant les saynètes qui se créent durant une heure sous vos yeux.
+        </div>
+    </ContentBlock>
 
     <div className={cn(
         "h-full w-full",
