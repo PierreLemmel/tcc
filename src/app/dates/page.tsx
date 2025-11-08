@@ -24,8 +24,8 @@ const Dates = () => <PageContainer
         "gap-0.5",
         "pb-10"
     )}>
-        <div className="text-lg pl-6">Jeudi 2 octobre</div>
-        <div className="text-lg pl-6">21 heures</div>
+        <div className="text-lg pl-6">Mardi 6 janvier</div>
+        <div className="text-lg pl-6">20 heures</div>
         <div className="text-lg pl-6">Théâtre Pixel</div>
         <div className="text-lg pl-6">18 rue Championnet, 75018 Paris</div>
         <div className="text-lg pl-6 pb-4">Réservation obligatoire</div>
