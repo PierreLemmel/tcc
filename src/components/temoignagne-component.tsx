@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { AudioLines, Mic, MicOff, Play, Square, Upload, X } from "lucide-react";
+import { AudioLines, Loader2, Mic, MicOff, Play, Square, Upload, X } from "lucide-react";
 import Button from "./button";
 import { useState, useRef, useEffect, useCallback } from "react";
 
@@ -12,8 +12,6 @@ const TemoignageComponent = () => {
     const [audioUrl, setAudioUrl] = useState<string | null>(null);
     const [fftData, setFftData] = useState<number[]>([]);
     const [recordingTime, setRecordingTime] = useState(0);
-    const [accessToken, setAccessToken] = useState<string | null>(null);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
     
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
     const audioContextRef = useRef<AudioContext | null>(null);
@@ -23,18 +21,18 @@ const TemoignageComponent = () => {
     const animationFrameRef = useRef<number | null>(null);
     const timerRef = useRef<NodeJS.Timeout | null>(null);
 
+    const [isUploading, setIsUploading] = useState(false);
+
     const startRecording = useCallback(async () => {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
             
-            // Set up audio context for FFT
             audioContextRef.current = new AudioContext();
             analyserRef.current = audioContextRef.current.createAnalyser();
             analyserRef.current.fftSize = 256;
             sourceRef.current = audioContextRef.current.createMediaStreamSource(stream);
             sourceRef.current.connect(analyserRef.current);
 
-            // Set up media recorder
             mediaRecorderRef.current = new MediaRecorder(stream);
             const chunks: Blob[] = [];
 
@@ -53,12 +51,10 @@ const TemoignageComponent = () => {
             setIsRecording(true);
             setRecordingTime(0);
 
-            // Start timer
             timerRef.current = setInterval(() => {
                 setRecordingTime(prev => prev + 1);
             }, 1000);
 
-            // Start FFT animation
             updateFFT();
         } catch (error) {
             console.error('Error starting recording:', error);
@@ -119,6 +115,7 @@ const TemoignageComponent = () => {
     const handleUpload = useCallback(async () => {
         if (!audioBlob) return;
 
+        setIsUploading(true);
         try {
             const file = new File([audioBlob], `temoignage_${Date.now()}.wav`, {
                 type: 'audio/wav'
@@ -149,6 +146,8 @@ const TemoignageComponent = () => {
         } catch (error) {
             console.error('Upload error:', error);
             alert('Erreur lors de l\'upload');
+        } finally {
+            setIsUploading(false);
         }
     }, [audioBlob, audioUrl]);
 
@@ -206,7 +205,7 @@ const TemoignageComponent = () => {
                     </Button>
                 ) : (
                     <div className="flex gap-4">
-                        <Button
+                        {!isUploading && <Button
                             onClick={isPlaying ? stopPlaying : playRecording}
                             variant="outline"
                         >
@@ -221,17 +220,26 @@ const TemoignageComponent = () => {
                                     Écouter
                                 </>
                             )}
+                        </Button>}
+
+                        <Button onClick={handleUpload} disabled={isUploading}>
+                            {isUploading ? (
+                                <>
+                                    <Loader2 className="w-5 h-5 animate-spin" />
+                                    Envoi en cours...
+                                </>
+                            ) : (
+                                <>
+                                    <Upload className="w-5 h-5" />
+                                    Envoyer
+                                </>
+                            )}
                         </Button>
 
-                        <Button onClick={handleUpload}>
-                            <Upload className="w-5 h-5" />
-                            Envoyer
-                        </Button>
-
-                        <Button onClick={handleCancel} variant="outline">
+                        {!isUploading && <Button onClick={handleCancel} variant="outline">
                             <X className="w-5 h-5" />
                             Annuler
-                        </Button>
+                        </Button>}
                     </div>
                 )}
 

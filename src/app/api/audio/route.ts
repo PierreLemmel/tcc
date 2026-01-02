@@ -36,7 +36,7 @@ export async function GET(request: Request) {
                     updated: file.metadata.updated,
                     downloadURL: url
                 });
-            }));
+            }))
 
         return NextResponse.json({
             folder: folder,
