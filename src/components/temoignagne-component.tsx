@@ -58,6 +58,7 @@ const TemoignageComponent = () => {
             updateFFT();
         } catch (error) {
             console.error('Error starting recording:', error);
+            alert('Erreur lors de l\'enregistrement : impossible d\'accéder au microphone. Essayez avec un autre navigateur internet ou envoyez nous un email à treschaircorps@gmail.com');
         }
     }, []);
 
