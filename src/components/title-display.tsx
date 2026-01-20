@@ -13,7 +13,7 @@ const TitleDisplay = () => {
             )}>
                 Très chair corps
             </h1>
-            <p className="text-lg">Seule-en-scène improvisé</p>
+            <p className="text-lg">Seule en scène improvisé</p>
         </div>
     </Link>
 }

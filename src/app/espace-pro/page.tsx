@@ -23,7 +23,7 @@ const EspacePro = () => <PageContainer
 
     <ContentBlock title="Espace pro">
         <div className="text-center">
-            Vous êtes programmateur ou programmatrice d&apos;une salle de théâtre et intéressé-es par le spectacle ?
+            Vous êtes programmateur ou programmatrice d&apos;une salle de théâtre et intéressé-e par le spectacle ?
         </div>
         <div className="text-center">
             Vous êtes un-e particulier qui souhaite qu&apos;on vienne jouer chez vous ? 

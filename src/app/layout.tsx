@@ -4,7 +4,7 @@ import BurgerMenu from "@/components/burger-menu";
 
 export const metadata: Metadata = {
 	title: "Très chair corps",
-	description: "Très chair corps - seule-en-scène improvisé",
+	description: "Très chair corps - seule en scène improvisé",
 };
 
 
