@@ -35,7 +35,7 @@ const Date2 = () => <div className={cn(
 )}>
     <div className="text-lg pl-6">Samedi 18 avril</div>
     <div className="text-lg pl-6">21 heures</div>
-    <div className="text-lg pl-6">Festival Semaine de l'Impro</div>
+    <div className="text-lg pl-6">Festival Semaine de l&apos;Impro</div>
     <div className="text-lg pl-6">Théâtre De Mon Désert</div>
     <div className="text-lg pl-6">71 rue de Mon Désert, 54000 Nancy</div>
     <div className="text-lg pl-6 pb-4">Billeterie sur place</div>
