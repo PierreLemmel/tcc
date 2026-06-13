@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { AudioLines, Loader2, Mic, MicOff, Play, Square, Upload, X } from "lucide-react";
+import { Loader2, Mic, Play, Square, Upload, X } from "lucide-react";
 import Button from "./button";
 import { useState, useRef, useEffect, useCallback } from "react";
 
@@ -12,7 +12,9 @@ const TemoignageComponent = () => {
     const [audioUrl, setAudioUrl] = useState<string | null>(null);
     const [fftData, setFftData] = useState<number[]>([]);
     const [recordingTime, setRecordingTime] = useState(0);
-    
+    const [playbackTime, setPlaybackTime] = useState(0);
+    const [duration, setDuration] = useState(0);
+
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
     const audioContextRef = useRef<AudioContext | null>(null);
     const analyserRef = useRef<AnalyserNode | null>(null);
@@ -91,24 +93,16 @@ const TemoignageComponent = () => {
     }, []);
 
     const playRecording = useCallback(() => {
-        if (!audioUrl) return;
-
-        if (!audioRef.current) {
-            audioRef.current = new Audio(audioUrl);
-        }
-
+        if (!audioRef.current) return;
         audioRef.current.play();
         setIsPlaying(true);
-
-        audioRef.current.onended = () => {
-            setIsPlaying(false);
-        };
-    }, [audioUrl]);
+    }, []);
 
     const stopPlaying = useCallback(() => {
         if (audioRef.current) {
             audioRef.current.pause();
             audioRef.current.currentTime = 0;
+            setPlaybackTime(0);
         }
         setIsPlaying(false);
     }, []);
@@ -133,10 +127,11 @@ const TemoignageComponent = () => {
             const result = await response.json();
 
             if (result.success) {
-                // Reset state after successful upload
                 setAudioBlob(null);
                 setAudioUrl(null);
                 setRecordingTime(0);
+                setPlaybackTime(0);
+                setDuration(0);
                 if (audioUrl) {
                     URL.revokeObjectURL(audioUrl);
                 }
@@ -153,15 +148,16 @@ const TemoignageComponent = () => {
     }, [audioBlob, audioUrl]);
 
     const handleCancel = useCallback(() => {
-        setAudioBlob(null);
-        setAudioUrl(null);
-        setRecordingTime(0);
         stopPlaying();
+        setAudioBlob(null);
+        setRecordingTime(0);
+        setPlaybackTime(0);
+        setDuration(0);
         if (audioUrl) {
-            audioRef.current = null;
             URL.revokeObjectURL(audioUrl);
+            setAudioUrl(null);
         }
-    }, [audioUrl]);
+    }, [audioUrl, stopPlaying]);
 
     useEffect(() => {
         return () => {
@@ -183,11 +179,17 @@ const TemoignageComponent = () => {
             "flex flex-col items-center justify-center gap-6",
             "p-8"
         )}>
-            
-
+            {audioUrl && (
+                <audio
+                    ref={audioRef}
+                    src={audioUrl}
+                    onTimeUpdate={(e) => setPlaybackTime(e.currentTarget.currentTime)}
+                    onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
+                    onEnded={() => { setIsPlaying(false); setPlaybackTime(0); }}
+                />
+            )}
 
             <div className="flex gap-4 items-center">
-                
                 {!audioBlob ? (
                     <Button
                         onClick={isRecording ? stopRecording : startRecording}
@@ -205,42 +207,61 @@ const TemoignageComponent = () => {
                         )}
                     </Button>
                 ) : (
-                    <div className="flex gap-4">
-                        {!isUploading && <Button
-                            onClick={isPlaying ? stopPlaying : playRecording}
-                            variant="outline"
-                        >
-                            {isPlaying ? (
-                                <>
-                                    <Square className="w-5 h-5" />
-                                    Arrêter
-                                </>
-                            ) : (
-                                <>
-                                    <Play className="w-5 h-5" />
-                                    Écouter
-                                </>
-                            )}
-                        </Button>}
+                    <div className="flex flex-col items-center gap-4 w-full">
+                        <div className="flex items-center gap-3 w-full max-w-sm">
+                            <button
+                                onClick={isPlaying ? stopPlaying : playRecording}
+                                disabled={isUploading}
+                                className="shrink-0 text-white/80 hover:text-white disabled:opacity-40 transition-colors"
+                            >
+                                {isPlaying ? (
+                                    <Square className="w-5 h-5 fill-current" />
+                                ) : (
+                                    <Play className="w-5 h-5 fill-current" />
+                                )}
+                            </button>
+                            <span className="text-white/60 text-xs tabular-nums w-10 text-right shrink-0">
+                                {formatTime(Math.floor(playbackTime))}
+                            </span>
+                            <input
+                                type="range"
+                                min={0}
+                                max={duration || 0}
+                                step={0.05}
+                                value={playbackTime}
+                                onChange={(e) => {
+                                    const time = Number(e.target.value);
+                                    setPlaybackTime(time);
+                                    if (audioRef.current) audioRef.current.currentTime = time;
+                                }}
+                                disabled={isUploading}
+                                className="flex-1 h-1 accent-red-500 cursor-pointer disabled:opacity-40"
+                            />
+                            <span className="text-white/60 text-xs tabular-nums w-10 shrink-0">
+                                {formatTime(Math.floor(duration))}
+                            </span>
+                        </div>
 
-                        <Button onClick={handleUpload} disabled={isUploading}>
-                            {isUploading ? (
-                                <>
-                                    <Loader2 className="w-5 h-5 animate-spin" />
-                                    Envoi en cours...
-                                </>
-                            ) : (
-                                <>
-                                    <Upload className="w-5 h-5" />
-                                    Envoyer
-                                </>
-                            )}
-                        </Button>
+                        <div className="flex gap-4">
+                            <Button onClick={handleUpload} disabled={isUploading}>
+                                {isUploading ? (
+                                    <>
+                                        <Loader2 className="w-5 h-5 animate-spin" />
+                                        Envoi en cours...
+                                    </>
+                                ) : (
+                                    <>
+                                        <Upload className="w-5 h-5" />
+                                        Envoyer
+                                    </>
+                                )}
+                            </Button>
 
-                        {!isUploading && <Button onClick={handleCancel} variant="outline">
-                            <X className="w-5 h-5" />
-                            Annuler
-                        </Button>}
+                            {!isUploading && <Button onClick={handleCancel} variant="outline">
+                                <X className="w-5 h-5" />
+                                Annuler
+                            </Button>}
+                        </div>
                     </div>
                 )}
 
